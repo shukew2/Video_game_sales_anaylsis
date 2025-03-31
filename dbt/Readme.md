@@ -31,7 +31,7 @@ Inside `models/`, create the following `.sql` files to transform raw data into a
 - `top_publishers_by_genre.sql`
 
 Each file is a `SELECT` query on the base table `video_game`, transforming it into useful analytics tables.
-The sql files can be found [here]
+The sql files can be found [here](https://github.com/shukew2/Video_game_sales_anaylsis/tree/main/dbt)
 
 ### 4. Run Models
 
