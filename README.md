@@ -82,7 +82,7 @@ Detail Process for dbt transformation can be found [here](https://github.com/shu
 
 ## 📊 Dashboard (Looker Studio)
 
-Link for the dashboards are [here](https://lookerstudio.google.com/reporting/530b29ec-e420-4546-a365-35cea43ecd46)
+    Link for the dashboards are [here](https://lookerstudio.google.com/reporting/530b29ec-e420-4546-a365-35cea43ecd46)
 ---
 
 #### 🌍 Regional Sales Overview (1989–2015)
@@ -105,7 +105,7 @@ This section of the dashboard visualizes how video game sales are distributed ac
   
   ![Dashboard Screenshot](images/dashboard1.png)
 ---
-### 🎮 Video Game Sales by Genre and Publisher
+#### 🎮 Video Game Sales by Genre and Publisher
 
 This section explores how global video game sales are distributed across different genres and which publishers dominate each category.
 
