@@ -42,6 +42,8 @@ The data pipeline follows a **batch ingestion model** orchestrated using **Kestr
 - Fully automated DAG: No manual step required
 - Supports dynamic year-based ingestion
 - Simulates batch processing while supporting backfill
+
+  Detail Process for Kestra pipeline can be found [here](https://github.com/shukew2/Video_game_sales_anaylsis/tree/main/Kestra)
 ---
 
 ## 🏢 Data Warehouse (BigQuery Design)
@@ -73,6 +75,8 @@ A dbt project was created to organize transformations and create clean analytica
 | `top_publishers_by_genre` | Top publishers in each genre by sales |
 
 These models enable flexible querying and form the basis of the dashboard visuals.
+
+Detail Process for dbt transformation can be found [here](https://github.com/shukew2/Video_game_sales_anaylsis/tree/main/dbt)
 
 ---
 
