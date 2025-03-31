@@ -26,7 +26,8 @@ The data pipeline follows a **batch ingestion model** orchestrated using **Kestr
 
 1. **Source**:
    The video game sales data is collected from kaggle:
-   [dataset](https://www.kaggle.com/datasets/anandshaw2001/video-game-sales)
+   [dataset](https://www.kaggle.com/datasets/anandshaw2001/video-game-sales).
+   
    Parquet files (e.g., `game_sales_2000.parquet`) are pre-cleaned and splited by year in order to simulate batch process.
    The Parquet files are [here](https://github.com/shukew2/Video_game_sales_anaylsis/tree/main/data_year)
 3. **Kestra Workflow**:
