@@ -24,20 +24,23 @@ Understanding these trends is beneficial for game developers, marketers, and bus
 
 The data pipeline follows a **batch ingestion model** orchestrated using **Kestra**, designed as an end-to-end workflow:
 
-1. **Source**: Local Parquet files (e.g., `game_sales_2000.parquet`) are split by year.
-2. **Kestra Workflow**:
+1. **Source**:
+   The video game sales data is collected from kaggle:
+   [dataset](https://www.kaggle.com/datasets/anandshaw2001/video-game-sales)
+   Parquet files (e.g., `game_sales_2000.parquet`) are pre-cleaned and splited by year in order to simulate batch process.
+   The Parquet files are [here](https://github.com/shukew2/Video_game_sales_anaylsis/tree/main/data_year)
+3. **Kestra Workflow**:
    - Copies Parquet files into Kestra's working directory
    - Uploads them to GCS under path `video_game_sales/yearly/<filename>`
    - Loads the files from GCS into BigQuery's raw table: `video_game_sales_raw`
    - Creates the final table `video_game` (partitioned and clustered) if it does not exist
    - Inserts new records for the selected year
-
-### ✅ Features
+ 
+**✅ Features**
 
 - Fully automated DAG: No manual step required
 - Supports dynamic year-based ingestion
-- Triggered manually or by cron (`year = current_year - 25`)
-
+- Simulates batch processing while supporting backfill
 ---
 
 ## 🏢 Data Warehouse (BigQuery Design)
@@ -76,33 +79,18 @@ These models enable flexible querying and form the basis of the dashboard visual
 
 An interactive dashboard was built in Looker Studio to present the analysis in a user-friendly way.
 
-### Key Charts & Controls:
-
-- **Line Chart**: Total Global Sales by Year
-- **Pie Chart**: Platform Sales Distribution (filtered by year)
-- **Stacked Bar Chart**: Yearly Sales per Platform
-- **Date Range Control**: Select start and end year to filter all charts
-
-### Sample View:
-
-![Dashboard Preview](dashboard_screenshot.png)
-
-> Users can filter by year range to observe changes in total sales and platform distribution over time.
 
 ---
 
 ## 🛠️ How to Run
 
-1. Place Parquet files under `/tmp/split_by_year/`
+1. Setting GCP properties in Kestra
 2. Trigger Kestra flow (`video_game_sales_upload`) with desired year
 3. Confirm data arrives in BigQuery table `video_game`
-4. Run dbt transformations:
-    ```bash
-    dbt run
-    ```
-5. Open Looker Studio and connect to your BigQuery `video_game` models
+4. Run dbt transformations
+5. Open Looker Studio and connect to BigQuery `video_game` models
 
----
+## 🧾 Author
 
-## 📁 Folder Structure
-
+Created by [Shuke Wang] as part of Data Engineering Zoomcamp   
+Project Timeline: January 2025 -- April 2025
