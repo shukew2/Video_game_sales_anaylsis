@@ -82,7 +82,15 @@ Detail Process for dbt transformation can be found [here](https://github.com/shu
 
 ## 📊 Dashboard (Looker Studio)
 
-An interactive dashboard was built in Looker Studio to present the analysis in a user-friendly way.
+#### 🎮 Platform Sales Distribution (2010–2015)
+
+This section of the dashboard visualizes how video game sales are distributed across different gaming platforms (e.g., PS3, X360, Wii) during the years 2010 to 2015.
+
+- The **stacked bar chart** shows each platform’s total sales per year, allowing for a year-by-year comparison.
+- The **donut chart** on the right aggregates total sales by platform, making it easy to see which platforms dominated globally in the selected period.
+- A **year range filter** allows users to explore platform performance in different time windows.
+  
+  ![Dashboard Screenshot](images/dashboard1.png)
 
 
 ---
