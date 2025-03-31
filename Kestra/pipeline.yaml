@@ -1,0 +1,77 @@
+id: video_game_sales_upload
+namespace: zoomcamp
+description: |
+  Download Parquet files split by year from GitHub to GCS and load into BigQuery partitioned clustering summary tables.
+  Supports backfill or auto-trigger.
+
+variables:
+  filename: "game_sales_{{ trigger.date | date('yyyy') }}.parquet"
+  gcs_path: "video_game_sales/yearly/game_sales_{{trigger.date | date('yyyy')}}.parquet"
+  gcs_uri: "gs://{{kv('GCP_BUCKET_NAME')}}/video_game_sales/yearly/game_sales_{{trigger.date | date('yyyy')}}.parquet"
+  data: "{{ outputs.download_parquet.outputFiles['game_sales_' ~ (trigger.date | date('yyyy')) ~ '.parquet'] }}"
+
+pluginDefaults:
+  - type: io.kestra.plugin.gcp
+    values:
+      serviceAccount: "{{kv('GCP_CREDS')}}"
+      projectId: "{{kv('GCP_PROJECT_ID')}}"
+      location: "{{kv('GCP_LOCATION')}}"
+      bucket: "{{kv('GCP_BUCKET_NAME')}}"
+      dataset: "{{kv('GCP_DATASET')}}"
+
+tasks:
+  - id: download_parquet
+    type: io.kestra.plugin.scripts.shell.Commands
+    outputFiles:
+      - "*.parquet"
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - wget -q "https://raw.githubusercontent.com/shukew2/Video_game_sales_anaylsis/main/data_year/{{ render(vars.filename) }}" -O "{{ render(vars.filename) }}"
+
+
+
+  - id: upload_to_gcs
+    type: io.kestra.plugin.gcp.gcs.Upload
+    from: "{{ render(vars.data) }}"
+    to: "{{ render(vars.gcs_uri) }}"
+
+  - id: create_game_sales_table
+    type: io.kestra.plugin.gcp.bigquery.Query
+    sql: |
+      CREATE TABLE IF NOT EXISTS {{kv('GCP_PROJECT_ID')}}.{{kv('GCP_DATASET')}}.video_game (
+        Rank INT64,
+        Name STRING,
+        Platform STRING,
+        Year INT64,
+        Genre STRING,
+        Publisher STRING,
+        NA_Sales FLOAT64,
+        EU_Sales FLOAT64,
+        JP_Sales FLOAT64,
+        Other_Sales FLOAT64,
+        Global_Sales FLOAT64
+      )
+      PARTITION BY RANGE_BUCKET(Year, GENERATE_ARRAY(1980, 2025, 1))
+      CLUSTER BY Platform, Genre;
+  - id: load_to_raw
+    type: io.kestra.plugin.gcp.bigquery.LoadFromGcs
+    from:
+      - "{{ render(vars.gcs_uri) }}"
+    format: PARQUET
+    destinationTable: "{{ kv('GCP_PROJECT_ID') }}.{{ kv('GCP_DATASET') }}.video_game_sales_raw"
+    createDisposition: CREATE_IF_NEEDED
+    writeDisposition: WRITE_APPEND
+
+
+  - id: insert_into_final
+    type: io.kestra.plugin.gcp.bigquery.Query
+    sql: |
+      INSERT INTO {{ kv('GCP_PROJECT_ID') }}.{{ kv('GCP_DATASET') }}.video_game
+      SELECT * FROM {{ kv('GCP_PROJECT_ID') }}.{{ kv('GCP_DATASET') }}.video_game_sales_raw
+      WHERE Year = {{ trigger.date | date('yyyy') }}
+
+triggers:
+  - id: yearly_trigger
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "0 2 1 1 *" 
