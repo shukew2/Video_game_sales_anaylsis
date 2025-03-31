@@ -2,9 +2,22 @@
 
 ## 📌 Project Overview
 
-This project explores the relationship between video game global sales and platforms across different years. With over 16,000 video game records that include region-wise sales (NA, EU, JP, Other), platform, genre, publisher, and release year, the objective is to analyze how platform popularity evolved and contributed to total sales over time.
+This project explores global video game sales across multiple dimensions — including platform, genre, publisher, and region — over several decades. With a dataset of over **16,000 records**, each entry includes information such as region-wise sales (NA, EU, JP, Other), platform, genre, publisher, and release year.
 
-Understanding these trends is beneficial for game developers, marketers, and business analysts — helping identify which platforms dominated sales in specific years, which genres were most profitable, and which publishers led the market. This project constructs a full cloud-based data pipeline that automates ingestion, transformation, and visualization of these trends.
+The main goal is to understand how different factors contributed to video game sales over time. Specifically, the analysis focuses on:
+
+- **Platform performance over the years**: Which consoles (e.g., PS3, X360, Wii) led the market in global sales?
+- **Regional trends**: How sales were distributed across North America, Europe, Japan, and other regions over time.
+- **Genre and publisher dominance**: Which genres sold the most, and which publishers consistently ranked among the top?
+
+These insights are valuable for game developers, publishers, and analysts to better understand market evolution, identify profitable genres, and target the right regions and platforms.
+
+To support this analysis, the project implements a **fully automated, cloud-based data pipeline** that:
+- Ingests raw data files using **Kestra** workflows.
+- Loads and transforms the data in **BigQuery** using **dbt** with partitioned and clustered tables for optimal performance.
+- Visualizes the insights through an interactive **Looker Studio dashboard** composed of multiple views with filters and comparisons.
+
+This end-to-end approach ensures scalable, maintainable, and reproducible data analysis.
 
 ---
 
