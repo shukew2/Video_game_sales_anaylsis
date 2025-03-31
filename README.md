@@ -82,7 +82,7 @@ Detail Process for dbt transformation can be found [here](https://github.com/shu
 
 ## 📊 Dashboard (Looker Studio)
 
-
+Link for the dashboards are [here](https://lookerstudio.google.com/reporting/530b29ec-e420-4546-a365-35cea43ecd46)
 ---
 
 #### 🌍 Regional Sales Overview (1989–2015)
@@ -95,7 +95,7 @@ This section provides an overview of video game sales across major regions: Nort
 
   ![Dashboard Screenshot](images/dashboard2.png)
 ---
-#### 🎮 Platform Sales Distribution
+#### 💻 Platform Sales Distribution
 
 This section of the dashboard visualizes how video game sales are distributed across different gaming platforms (e.g., PS3, X360, Wii) during different years.
 
@@ -104,7 +104,17 @@ This section of the dashboard visualizes how video game sales are distributed ac
 - A **year range filter** allows users to explore platform performance in different time windows.
   
   ![Dashboard Screenshot](images/dashboard1.png)
+---
+### 🎮 Video Game Sales by Genre and Publisher
 
+This section explores how global video game sales are distributed across different genres and which publishers dominate each category.
+
+- The **bar chart** on the left shows the total sales per genre, segmented by top publishers such as Nintendo, Activision, Ubisoft, and more.
+- The **pie chart** on the right shows the overall share of each game genre in the global market, providing a quick snapshot of genre popularity.
+
+Users can interact with the filter to focus on specific publishers and observe their market presence across genres.
+
+![Genre and Publisher Sales](images/dashboard3.png)
 
 ---
 
