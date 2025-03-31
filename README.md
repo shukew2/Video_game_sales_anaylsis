@@ -97,13 +97,13 @@ Detail Process for dbt transformation can be found [here](https://github.com/shu
    ##### Link for the dashboards are [here](https://lookerstudio.google.com/reporting/530b29ec-e420-4546-a365-35cea43ecd46)
 ---
 
-#### 🌍 Regional Sales Overview (1989–2015)
+#### 🌍 Regional Sales Overview 
 
 This section provides an overview of video game sales across major regions: North America, Europe, Japan, and other markets.  
 
 - The **area chart** on the left tracks the evolution of global sales over time, highlighting growth and decline trends.
 - The **bar chart** on the right breaks down yearly sales by region, allowing comparison of regional markets.
-- A **year range filter** lets users dynamically explore historical changes between 1989 and 2015.
+- A **year range filter** lets users dynamically explore historical changes between selected years.
 
   ![Dashboard Screenshot](images/dashboard2.png)
 ---
